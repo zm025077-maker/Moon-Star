@@ -1,105 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>Zubair Online Store</title>
-
-<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <style>
 
 body{
 font-family:Arial;
-margin:0;
 background:#f2f2f2;
+margin:0;
 }
 
 header{
-background:#0a7cff;
+background:black;
 color:white;
 padding:15px;
 text-align:center;
 }
 
-nav{
-background:#333;
-text-align:center;
-padding:10px;
+.cart{
+position:absolute;
+right:20px;
+top:20px;
+background:red;
+color:white;
+padding:5px 10px;
+border-radius:5px;
 }
 
-nav button{
-background:#555;
-color:white;
-border:none;
+.container{
+padding:20px;
+}
+
+form input,form select{
 padding:10px;
 margin:5px;
+}
+
+button{
+padding:8px;
 cursor:pointer;
-}
-
-.search{
-text-align:center;
-margin:20px;
-}
-
-.search input{
-padding:10px;
-width:80%;
-max-width:400px;
+margin-top:5px;
 }
 
 .products{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-padding:20px;
+grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+gap:20px;
+margin-top:20px;
 }
 
 .card{
 background:white;
 padding:10px;
-border-radius:8px;
+border-radius:5px;
 box-shadow:0 0 5px #ccc;
-text-align:center;
 }
 
 .card img{
 width:100%;
-height:160px;
+height:150px;
 object-fit:cover;
 }
 
 .price{
-color:red;
+color:green;
 font-weight:bold;
 }
 
 .old{
 text-decoration:line-through;
-color:gray;
-}
-
-button{
-padding:8px 12px;
-margin:5px;
-border:none;
-cursor:pointer;
-}
-
-.cartbtn{
-background:orange;
-color:white;
-}
-
-.orderbtn{
-background:#25d366;
-color:white;
-}
-
-footer{
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
+color:red;
 }
 
 </style>
@@ -112,43 +83,85 @@ padding:20px;
 
 <h1>Zubair Online Store</h1>
 
+<div class="cart">
+Cart: <span id="cartCount">0</span>
+</div>
+
 </header>
 
-<nav>
+<div class="container">
 
-<button onclick="filterCat('all')">All</button>
-<button onclick="filterCat('fan')">Fans</button>
-<button onclick="filterCat('heater')">Heaters</button>
-<button onclick="filterCat('watch')">Watches</button>
-<button onclick="filterCat('mobile')">Mobile</button>
+<h2>Add Product</h2>
 
-</nav>
+<form id="productForm">
 
-<div class="search">
+<input type="text" id="name" placeholder="Product Name" required>
 
-<input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
+<input type="number" id="price" placeholder="Price" required>
 
-</div>
+<input type="number" id="oldPrice" placeholder="Old Price">
+
+<input type="text" id="image" placeholder="Image URL" required>
+
+<select id="cat">
+
+<option value="mobile">Mobile</option>
+<option value="laptop">Laptop</option>
+<option value="watch">Watch</option>
+
+</select>
+
+<button type="submit">Add Product</button>
+
+</form>
+
+<br>
+
+<input type="text" id="search" placeholder="Search product" onkeyup="searchProduct()">
+
+<select onchange="filterCat(this.value)">
+<option value="all">All</option>
+<option value="mobile">Mobile</option>
+<option value="laptop">Laptop</option>
+<option value="watch">Watch</option>
+</select>
 
 <div class="products" id="products"></div>
 
-<footer>
-
-<h3>Contact</h3>
-
-<p>Email: m025077@gmail.com</p>
-
-<p>JazzCash: 03067098162</p>
-
-<p>EasyPaisa: 03482009136</p>
-
-</footer>
+</div>
 
 <script>
 
-let products=JSON.parse(localStorage.getItem("products")) || []
+let products = JSON.parse(localStorage.getItem("products")) || []
+let cart = JSON.parse(localStorage.getItem("cart")) || []
 
-let container=document.getElementById("products")
+let container = document.getElementById("products")
+
+updateCart()
+
+document.getElementById("productForm").onsubmit=function(e){
+
+e.preventDefault()
+
+let newProduct={
+
+name:document.getElementById("name").value,
+price:document.getElementById("price").value,
+oldPrice:document.getElementById("oldPrice").value,
+image:document.getElementById("image").value,
+cat:document.getElementById("cat").value
+
+}
+
+products.push(newProduct)
+
+localStorage.setItem("products",JSON.stringify(products))
+
+showProducts(products)
+
+this.reset()
+
+}
 
 function showProducts(list){
 
@@ -162,19 +175,20 @@ div.className="card"
 
 div.innerHTML=`
 
-<img src="${p.image}" style="width:100%;height:160px;object-fit:cover;">
+<img src="${p.image}">
+
 <h3>${p.name}</h3>
 
 <p class="price">Rs ${p.price}</p>
 
 <p class="old">Rs ${p.oldPrice}</p>
 
-<button class="cartbtn">Add to Cart</button>
+<button onclick="addToCart(${i})">Add To Cart</button>
+
 <button onclick="deleteProduct(${i})" style="background:red;color:white;">Delete</button>
-<a href="https://wa.me/923067098162">
 
-<button class="orderbtn">WhatsApp Order</button>
-
+<a href="https://wa.me/923067098162?text=I want to order ${p.name}">
+<button style="background:green;color:white;">WhatsApp Order</button>
 </a>
 
 `
@@ -185,12 +199,38 @@ container.appendChild(div)
 
 }
 
+function deleteProduct(index){
+
+products.splice(index,1)
+
+localStorage.setItem("products",JSON.stringify(products))
+
 showProducts(products)
+
+}
+
+function addToCart(index){
+
+cart.push(products[index])
+
+localStorage.setItem("cart",JSON.stringify(cart))
+
+updateCart()
+
+alert("Product added to cart")
+
+}
+
+function updateCart(){
+
+document.getElementById("cartCount").innerText=cart.length
+
+}
 
 function searchProduct(){
 
 let value=document.getElementById("search").value.toLowerCase()
-  
+
 let filtered=products.filter(p=>p.name.toLowerCase().includes(value))
 
 showProducts(filtered)
@@ -203,7 +243,6 @@ if(cat=="all"){
 
 showProducts(products)
 
-  }
 }else{
 
 let filtered=products.filter(p=>p.cat==cat)
@@ -213,17 +252,10 @@ showProducts(filtered)
 }
 
 }
-function deleteProduct(index){
-
-products.splice(index,1)
-
-localStorage.setItem("products",JSON.stringify(products))
 
 showProducts(products)
 
-}
 </script>
 
 </body>
-
 </html>
