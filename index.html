@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Zubair Online Store</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -9,24 +11,16 @@
 body{
 font-family:Arial;
 margin:0;
-background:#f5f5f5;
+background:#f2f2f2;
 }
-
-/* Header */
 
 header{
 background:#ff6600;
 color:white;
 text-align:center;
 padding:15px;
+font-size:24px;
 }
-
-header img{
-width:70px;
-border-radius:50%;
-}
-
-/* Menu */
 
 nav{
 background:#222;
@@ -38,15 +32,13 @@ background:none;
 border:none;
 color:white;
 padding:14px 20px;
-cursor:pointer;
 font-size:16px;
+cursor:pointer;
 }
 
 nav button:hover{
 background:#ff6600;
 }
-
-/* Search */
 
 .search-box{
 text-align:center;
@@ -55,13 +47,11 @@ margin:20px;
 
 .search-box input{
 width:80%;
-padding:12px;
+padding:10px;
 font-size:16px;
 border-radius:6px;
 border:1px solid #ccc;
 }
-
-/* Products */
 
 .products{
 display:grid;
@@ -90,7 +80,7 @@ color:#ff6600;
 font-size:18px;
 }
 
-button.order{
+.order{
 background:#25D366;
 color:white;
 border:none;
@@ -98,8 +88,6 @@ padding:10px 15px;
 border-radius:5px;
 cursor:pointer;
 }
-
-/* Footer */
 
 footer{
 background:#111;
@@ -116,9 +104,7 @@ padding:15px;
 
 <header>
 
-<img src="YOURPHOTO.jpg">
-
-<h2>Zubair Online Store</h2>
+Zubair Online Store
 
 </header>
 
@@ -134,7 +120,7 @@ padding:15px;
 
 <div class="search-box">
 
-<input type="text" id="search" placeholder="Search products..." onkeyup="searchProduct()">
+<input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
 
 </div>
 
@@ -150,26 +136,30 @@ padding:15px;
 
 let products=[
 
-{name:"Ceiling Fan",price:"Rs 3500",cat:"fan",img:"https://source.unsplash.com/200x200/?ceiling-fan"},
-{name:"Table Fan",price:"Rs 2500",cat:"fan",img:"https://source.unsplash.com/200x200/?table-fan"},
-{name:"Wall Fan",price:"Rs 3000",cat:"fan",img:"https://source.unsplash.com/200x200/?wall-fan"},
-{name:"Room Heater",price:"Rs 4200",cat:"heater",img:"https://source.unsplash.com/200x200/?heater"},
-{name:"Electric Heater",price:"Rs 3800",cat:"heater",img:"https://source.unsplash.com/200x200/?electric-heater"},
-{name:"Smart Watch",price:"Rs 2500",cat:"watch",img:"https://source.unsplash.com/200x200/?smartwatch"},
-{name:"Digital Watch",price:"Rs 1800",cat:"watch",img:"https://source.unsplash.com/200x200/?watch"},
-{name:"Mobile Cover",price:"Rs 500",cat:"mobile",img:"https://source.unsplash.com/200x200/?phone-case"},
-{name:"Phone Pouch",price:"Rs 600",cat:"mobile",img:"https://source.unsplash.com/200x200/?phone-pouch"},
-{name:"Wireless Earbuds",price:"Rs 2200",cat:"mobile",img:"https://source.unsplash.com/200x200/?earbuds"},
-{name:"Bluetooth Speaker",price:"Rs 3000",cat:"mobile",img:"https://source.unsplash.com/200x200/?speaker"},
-{name:"Power Bank",price:"Rs 2000",cat:"mobile",img:"https://source.unsplash.com/200x200/?power-bank"},
-{name:"USB Cable",price:"Rs 300",cat:"mobile",img:"https://source.unsplash.com/200x200/?usb-cable"},
-{name:"Phone Charger",price:"Rs 900",cat:"mobile",img:"https://source.unsplash.com/200x200/?phone-charger"},
-{name:"LED Bulb",price:"Rs 400",cat:"electronic",img:"https://source.unsplash.com/200x200/?led-bulb"},
-{name:"Desk Lamp",price:"Rs 1200",cat:"electronic",img:"https://source.unsplash.com/200x200/?lamp"},
-{name:"Tripod Stand",price:"Rs 1500",cat:"electronic",img:"https://source.unsplash.com/200x200/?tripod"},
-{name:"Ring Light",price:"Rs 2000",cat:"electronic",img:"https://source.unsplash.com/200x200/?ring-light"},
-{name:"Keyboard",price:"Rs 1800",cat:"electronic",img:"https://source.unsplash.com/200x200/?keyboard"},
-{name:"Wireless Mouse",price:"Rs 1200",cat:"electronic",img:"https://source.unsplash.com/200x200/?mouse"}
+{name:"Ceiling Fan",price:"Rs 3500",cat:"fan",img:"https://loremflickr.com/300/300/fan"},
+{name:"Table Fan",price:"Rs 2500",cat:"fan",img:"https://loremflickr.com/300/300/tablefan"},
+{name:"Wall Fan",price:"Rs 3000",cat:"fan",img:"https://loremflickr.com/300/300/wallfan"},
+
+{name:"Room Heater",price:"Rs 4200",cat:"heater",img:"https://loremflickr.com/300/300/heater"},
+{name:"Electric Heater",price:"Rs 3800",cat:"heater",img:"https://loremflickr.com/300/300/electricheater"},
+
+{name:"Smart Watch",price:"Rs 2500",cat:"watch",img:"https://loremflickr.com/300/300/smartwatch"},
+{name:"Digital Watch",price:"Rs 1800",cat:"watch",img:"https://loremflickr.com/300/300/watch"},
+
+{name:"Mobile Cover",price:"Rs 500",cat:"mobile",img:"https://loremflickr.com/300/300/phonecase"},
+{name:"Phone Pouch",price:"Rs 600",cat:"mobile",img:"https://loremflickr.com/300/300/phonepouch"},
+{name:"Wireless Earbuds",price:"Rs 2200",cat:"mobile",img:"https://loremflickr.com/300/300/earbuds"},
+{name:"Bluetooth Speaker",price:"Rs 3000",cat:"mobile",img:"https://loremflickr.com/300/300/speaker"},
+{name:"Power Bank",price:"Rs 2000",cat:"mobile",img:"https://loremflickr.com/300/300/powerbank"},
+{name:"USB Cable",price:"Rs 300",cat:"mobile",img:"https://loremflickr.com/300/300/usbcable"},
+{name:"Phone Charger",price:"Rs 900",cat:"mobile",img:"https://loremflickr.com/300/300/charger"},
+
+{name:"LED Bulb",price:"Rs 400",cat:"electronic",img:"https://loremflickr.com/300/300/bulb"},
+{name:"Desk Lamp",price:"Rs 1200",cat:"electronic",img:"https://loremflickr.com/300/300/lamp"},
+{name:"Tripod Stand",price:"Rs 1500",cat:"electronic",img:"https://loremflickr.com/300/300/tripod"},
+{name:"Ring Light",price:"Rs 2000",cat:"electronic",img:"https://loremflickr.com/300/300/ringlight"},
+{name:"Keyboard",price:"Rs 1800",cat:"electronic",img:"https://loremflickr.com/300/300/keyboard"},
+{name:"Wireless Mouse",price:"Rs 1200",cat:"electronic",img:"https://loremflickr.com/300/300/mouse"}
 
 ];
 
@@ -179,9 +169,10 @@ function showProducts(list){
 
 container.innerHTML="";
 
-list.forEach(p=>{
+list.forEach(function(p){
 
 let card=document.createElement("div");
+
 card.className="card";
 
 card.innerHTML=`
@@ -235,4 +226,5 @@ showProducts(filtered);
 </script>
 
 </body>
+
 </html>
