@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Admin Panel</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+padding:20px;
+}
+
+input,select{
+padding:10px;
+margin:10px;
+width:250px;
+}
+
+button{
+padding:10px 15px;
+background:#0a7cff;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Add Product</h2>
+
+<input id="name" placeholder="Product Name"><br>
+
+<input id="price" placeholder="Price"><br>
+
+<input id="old" placeholder="Old Price"><br>
+
+<input id="img" placeholder="Image URL"><br>
+
+<select id="cat">
+
+<option value="fan">Fan</option>
+<option value="heater">Heater</option>
+<option value="watch">Watch</option>
+<option value="mobile">Mobile</option>
+
+</select>
+
+<br>
+
+<button onclick="addProduct()">Add Product</button>
+
+<script>
+
+function addProduct(){
+
+let product={
+
+name:document.getElementById("name").value,
+price:document.getElementById("price").value,
+old:document.getElementById("old").value,
+img:document.getElementById("img").value,
+cat:document.getElementById("cat").value
+
+}
+
+let products=JSON.parse(localStorage.getItem("products")) || []
+
+products.push(product)
+
+localStorage.setItem("products",JSON.stringify(products))
+
+alert("Product Added Successfully")
+
+}
+
+</script>
+
+</body>
+
+</html>
