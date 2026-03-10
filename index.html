@@ -190,7 +190,7 @@ showProducts(products)
 function searchProduct(){
 
 let value=document.getElementById("search").value.toLowerCase()
-
+  
 let filtered=products.filter(p=>p.name.toLowerCase().includes(value))
 
 showProducts(filtered)
@@ -203,6 +203,7 @@ if(cat=="all"){
 
 showProducts(products)
 
+  }
 }else{
 
 let filtered=products.filter(p=>p.cat==cat)
@@ -212,7 +213,15 @@ showProducts(filtered)
 }
 
 }
+function deleteProduct(index){
 
+products.splice(index,1)
+
+localStorage.setItem("products",JSON.stringify(products))
+
+showProducts(products)
+
+}
 </script>
 
 </body>
