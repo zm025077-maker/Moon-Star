@@ -2,7 +2,6 @@
 <html>
 <head>
 <title>Zubair Online Store</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -13,29 +12,41 @@ margin:0;
 background:#f5f5f5;
 }
 
+/* Header */
+
 header{
 background:#ff6600;
 color:white;
-padding:15px;
 text-align:center;
-font-size:24px;
+padding:15px;
 }
+
+header img{
+width:70px;
+border-radius:50%;
+}
+
+/* Menu */
 
 nav{
 background:#222;
 text-align:center;
 }
 
-nav a{
+nav button{
+background:none;
+border:none;
 color:white;
-padding:12px 20px;
-display:inline-block;
-text-decoration:none;
+padding:14px 20px;
+cursor:pointer;
+font-size:16px;
 }
 
-nav a:hover{
+nav button:hover{
 background:#ff6600;
 }
+
+/* Search */
 
 .search-box{
 text-align:center;
@@ -49,6 +60,8 @@ font-size:16px;
 border-radius:6px;
 border:1px solid #ccc;
 }
+
+/* Products */
 
 .products{
 display:grid;
@@ -77,13 +90,16 @@ color:#ff6600;
 font-size:18px;
 }
 
-button{
+button.order{
 background:#25D366;
 color:white;
 border:none;
 padding:10px 15px;
 border-radius:5px;
+cursor:pointer;
 }
+
+/* Footer */
 
 footer{
 background:#111;
@@ -98,45 +114,72 @@ padding:15px;
 
 <body>
 
-<header>Zubair Online Store</header>
+<header>
+
+<img src="YOURPHOTO.jpg">
+
+<h2>Zubair Online Store</h2>
+
+</header>
 
 <nav>
-<a href="#">Home</a>
-<a href="#">Mobiles</a>
-<a href="#">Accessories</a>
-<a href="#">Contact</a>
+
+<button onclick="showCategory('all')">Home</button>
+<button onclick="showCategory('fan')">Fans</button>
+<button onclick="showCategory('heater')">Heaters</button>
+<button onclick="showCategory('mobile')">Mobile Accessories</button>
+<button onclick="showCategory('watch')">Watches</button>
+
 </nav>
 
 <div class="search-box">
-<input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
+
+<input type="text" id="search" placeholder="Search products..." onkeyup="searchProduct()">
+
 </div>
 
 <div class="products" id="products"></div>
 
 <footer>
+
 © 2026 Zubair Store
+
 </footer>
 
 <script>
 
-let products = [
+let products=[
 
-{name:"Smart Watch",img:"https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b"},
-{name:"Mobile Cover",img:"https://images.unsplash.com/photo-1603313011108-d0e2c9c8b87b"},
-{name:"Wireless Earbuds",img:"https://images.unsplash.com/photo-1585386959984-a4155224a1ad"},
-{name:"Bluetooth Speaker",img:"https://images.unsplash.com/photo-1589003077984-894e133dabab"},
-{name:"Power Bank",img:"https://images.unsplash.com/photo-1580894908361-967195033215"},
-{name:"Phone Charger",img:"https://images.unsplash.com/photo-1586953208448-b95a79798f07"},
-{name:"Gaming Mouse",img:"https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7"},
-{name:"Headphones",img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e"},
-{name:"Laptop Bag",img:"https://images.unsplash.com/photo-1585386959984-a4155224a1ad"},
-{name:"USB Cable",img:"https://images.unsplash.com/photo-1611175694986-8d0d2b96f8a4"}
+{name:"Ceiling Fan",price:"Rs 3500",cat:"fan",img:"https://source.unsplash.com/200x200/?ceiling-fan"},
+{name:"Table Fan",price:"Rs 2500",cat:"fan",img:"https://source.unsplash.com/200x200/?table-fan"},
+{name:"Wall Fan",price:"Rs 3000",cat:"fan",img:"https://source.unsplash.com/200x200/?wall-fan"},
+{name:"Room Heater",price:"Rs 4200",cat:"heater",img:"https://source.unsplash.com/200x200/?heater"},
+{name:"Electric Heater",price:"Rs 3800",cat:"heater",img:"https://source.unsplash.com/200x200/?electric-heater"},
+{name:"Smart Watch",price:"Rs 2500",cat:"watch",img:"https://source.unsplash.com/200x200/?smartwatch"},
+{name:"Digital Watch",price:"Rs 1800",cat:"watch",img:"https://source.unsplash.com/200x200/?watch"},
+{name:"Mobile Cover",price:"Rs 500",cat:"mobile",img:"https://source.unsplash.com/200x200/?phone-case"},
+{name:"Phone Pouch",price:"Rs 600",cat:"mobile",img:"https://source.unsplash.com/200x200/?phone-pouch"},
+{name:"Wireless Earbuds",price:"Rs 2200",cat:"mobile",img:"https://source.unsplash.com/200x200/?earbuds"},
+{name:"Bluetooth Speaker",price:"Rs 3000",cat:"mobile",img:"https://source.unsplash.com/200x200/?speaker"},
+{name:"Power Bank",price:"Rs 2000",cat:"mobile",img:"https://source.unsplash.com/200x200/?power-bank"},
+{name:"USB Cable",price:"Rs 300",cat:"mobile",img:"https://source.unsplash.com/200x200/?usb-cable"},
+{name:"Phone Charger",price:"Rs 900",cat:"mobile",img:"https://source.unsplash.com/200x200/?phone-charger"},
+{name:"LED Bulb",price:"Rs 400",cat:"electronic",img:"https://source.unsplash.com/200x200/?led-bulb"},
+{name:"Desk Lamp",price:"Rs 1200",cat:"electronic",img:"https://source.unsplash.com/200x200/?lamp"},
+{name:"Tripod Stand",price:"Rs 1500",cat:"electronic",img:"https://source.unsplash.com/200x200/?tripod"},
+{name:"Ring Light",price:"Rs 2000",cat:"electronic",img:"https://source.unsplash.com/200x200/?ring-light"},
+{name:"Keyboard",price:"Rs 1800",cat:"electronic",img:"https://source.unsplash.com/200x200/?keyboard"},
+{name:"Wireless Mouse",price:"Rs 1200",cat:"electronic",img:"https://source.unsplash.com/200x200/?mouse"}
 
 ];
 
 let container=document.getElementById("products");
 
-products.forEach(function(p){
+function showProducts(list){
+
+container.innerHTML="";
+
+list.forEach(p=>{
 
 let card=document.createElement("div");
 card.className="card";
@@ -145,10 +188,12 @@ card.innerHTML=`
 
 <img src="${p.img}">
 <h3>${p.name}</h3>
-<p class="price">$10</p>
+<p class="price">${p.price}</p>
 
 <a href="https://wa.me/923482009136">
-<button>Order on WhatsApp</button>
+
+<button class="order">Order on WhatsApp</button>
+
 </a>
 
 `;
@@ -157,22 +202,33 @@ container.appendChild(card);
 
 });
 
+}
+
+showProducts(products);
+
 function searchProduct(){
 
 let input=document.getElementById("search").value.toLowerCase();
-let cards=document.querySelectorAll(".card");
 
-cards.forEach(function(card){
+let filtered=products.filter(p=>p.name.toLowerCase().includes(input));
 
-let title=card.querySelector("h3").innerText.toLowerCase();
+showProducts(filtered);
 
-if(title.includes(input)){
-card.style.display="block";
-}else{
-card.style.display="none";
 }
 
-});
+function showCategory(cat){
+
+if(cat=="all"){
+
+showProducts(products);
+
+}else{
+
+let filtered=products.filter(p=>p.cat==cat);
+
+showProducts(filtered);
+
+}
 
 }
 
