@@ -3,6 +3,8 @@
 <head>
 <title>Zubair Online Store</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 
 body{
@@ -17,23 +19,36 @@ header{
 background:#ff6600;
 color:white;
 padding:15px;
-font-size:22px;
 text-align:center;
+font-size:24px;
 }
 
 /* Menu */
 
 nav{
 background:#222;
-padding:10px;
-text-align:center;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
 }
 
 nav a{
 color:white;
-margin:10px;
+padding:12px 20px;
 text-decoration:none;
-font-size:16px;
+}
+
+nav a:hover{
+background:#ff6600;
+}
+
+/* Banner */
+
+.banner{
+background:url("https://via.placeholder.com/1200x300");
+height:250px;
+background-size:cover;
+background-position:center;
 }
 
 /* Search */
@@ -45,9 +60,9 @@ margin:20px;
 
 .search-box input{
 width:80%;
-padding:10px;
+padding:12px;
 font-size:16px;
-border-radius:5px;
+border-radius:6px;
 border:1px solid #ccc;
 }
 
@@ -62,10 +77,15 @@ padding:20px;
 
 .card{
 background:white;
-padding:15px;
 border-radius:10px;
+padding:15px;
 text-align:center;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
 }
 
 .card img{
@@ -76,6 +96,7 @@ border-radius:10px;
 .price{
 color:#ff6600;
 font-size:18px;
+margin:5px;
 }
 
 button{
@@ -87,12 +108,13 @@ border-radius:5px;
 cursor:pointer;
 }
 
+/* Footer */
+
 footer{
 background:#111;
 color:white;
 text-align:center;
 padding:15px;
-margin-top:30px;
 }
 
 </style>
@@ -109,11 +131,14 @@ Zubair Online Store
 <a href="#">Home</a>
 <a href="#">Mobiles</a>
 <a href="#">Accessories</a>
+<a href="#">Deals</a>
 <a href="#">Contact</a>
 </nav>
 
+<div class="banner"></div>
+
 <div class="search-box">
-<input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
+<input type="text" id="search" placeholder="Search products..." onkeyup="searchProduct()">
 </div>
 
 <div class="products" id="products"></div>
@@ -127,7 +152,6 @@ Zubair Online Store
 /* 50 Products */
 
 let products = [
-
 "Smart Watch","Mobile Cover","Wireless Earbuds","Bluetooth Speaker","Power Bank",
 "Phone Charger","USB Cable","Gaming Mouse","Laptop Bag","Headphones",
 "LED Ring Light","Tripod Stand","Memory Card","USB Flash Drive","Phone Stand",
@@ -138,10 +162,7 @@ let products = [
 "Digital Clock","Fitness Tracker","Camera Lens","Phone Cooling Fan","VR Glasses",
 "WiFi Router","USB Hub","Mini Speaker","LED Strip Light","Phone Case Premium",
 "Selfie Stick","Laptop Cooling Pad","Portable SSD","Gaming Pad","Tablet Stand"
-
 ];
-
-/* Show Products */
 
 let container = document.getElementById("products");
 
