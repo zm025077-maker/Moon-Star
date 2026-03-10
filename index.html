@@ -13,8 +13,6 @@ margin:0;
 background:#f5f5f5;
 }
 
-/* Header */
-
 header{
 background:#ff6600;
 color:white;
@@ -23,35 +21,21 @@ text-align:center;
 font-size:24px;
 }
 
-/* Menu */
-
 nav{
 background:#222;
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
+text-align:center;
 }
 
 nav a{
 color:white;
 padding:12px 20px;
+display:inline-block;
 text-decoration:none;
 }
 
 nav a:hover{
 background:#ff6600;
 }
-
-/* Banner */
-
-.banner{
-background:url("https://via.placeholder.com/1200x300");
-height:250px;
-background-size:cover;
-background-position:center;
-}
-
-/* Search */
 
 .search-box{
 text-align:center;
@@ -66,8 +50,6 @@ border-radius:6px;
 border:1px solid #ccc;
 }
 
-/* Products */
-
 .products{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -81,22 +63,18 @@ border-radius:10px;
 padding:15px;
 text-align:center;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.05);
 }
 
 .card img{
 width:100%;
+height:200px;
+object-fit:cover;
 border-radius:10px;
 }
 
 .price{
 color:#ff6600;
 font-size:18px;
-margin:5px;
 }
 
 button{
@@ -105,10 +83,7 @@ color:white;
 border:none;
 padding:10px 15px;
 border-radius:5px;
-cursor:pointer;
 }
-
-/* Footer */
 
 footer{
 background:#111;
@@ -123,68 +98,64 @@ padding:15px;
 
 <body>
 
-<header>
-Zubair Online Store
-</header>
+<header>Zubair Online Store</header>
 
 <nav>
 <a href="#">Home</a>
 <a href="#">Mobiles</a>
 <a href="#">Accessories</a>
-<a href="#">Deals</a>
 <a href="#">Contact</a>
 </nav>
 
-<div class="banner"></div>
-
 <div class="search-box">
-<input type="text" id="search" placeholder="Search products..." onkeyup="searchProduct()">
+<input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
 </div>
 
 <div class="products" id="products"></div>
 
 <footer>
-© 2026 Zubair Store | All Rights Reserved
+© 2026 Zubair Store
 </footer>
 
 <script>
 
-/* 50 Products */
-
 let products = [
-"Smart Watch","Mobile Cover","Wireless Earbuds","Bluetooth Speaker","Power Bank",
-"Phone Charger","USB Cable","Gaming Mouse","Laptop Bag","Headphones",
-"LED Ring Light","Tripod Stand","Memory Card","USB Flash Drive","Phone Stand",
-"Keyboard","Gaming Headset","Smart Band","Mini Camera","Wireless Charger",
-"Car Mobile Holder","Portable Fan","LED Lamp","Tablet Cover","Laptop Stand",
-"Phone Grip","Wireless Mouse","Bluetooth Keyboard","Desk Lamp","HDMI Cable",
-"Screen Protector","Microphone","Gaming Controller","Drone Toy","Smart Bulb",
-"Digital Clock","Fitness Tracker","Camera Lens","Phone Cooling Fan","VR Glasses",
-"WiFi Router","USB Hub","Mini Speaker","LED Strip Light","Phone Case Premium",
-"Selfie Stick","Laptop Cooling Pad","Portable SSD","Gaming Pad","Tablet Stand"
+
+{name:"Smart Watch",img:"https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b"},
+{name:"Mobile Cover",img:"https://images.unsplash.com/photo-1603313011108-d0e2c9c8b87b"},
+{name:"Wireless Earbuds",img:"https://images.unsplash.com/photo-1585386959984-a4155224a1ad"},
+{name:"Bluetooth Speaker",img:"https://images.unsplash.com/photo-1589003077984-894e133dabab"},
+{name:"Power Bank",img:"https://images.unsplash.com/photo-1580894908361-967195033215"},
+{name:"Phone Charger",img:"https://images.unsplash.com/photo-1586953208448-b95a79798f07"},
+{name:"Gaming Mouse",img:"https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7"},
+{name:"Headphones",img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e"},
+{name:"Laptop Bag",img:"https://images.unsplash.com/photo-1585386959984-a4155224a1ad"},
+{name:"USB Cable",img:"https://images.unsplash.com/photo-1611175694986-8d0d2b96f8a4"}
+
 ];
 
-let container = document.getElementById("products");
+let container=document.getElementById("products");
 
-products.forEach(function(item){
+products.forEach(function(p){
 
-let card = document.createElement("div");
+let card=document.createElement("div");
 card.className="card";
 
-card.innerHTML = `
-<img src="https://via.placeholder.com/200">
-<h3>${item}</h3>
+card.innerHTML=`
+
+<img src="${p.img}">
+<h3>${p.name}</h3>
 <p class="price">$10</p>
+
 <a href="https://wa.me/923482009136">
 <button>Order on WhatsApp</button>
 </a>
+
 `;
 
 container.appendChild(card);
 
 });
-
-/* Search */
 
 function searchProduct(){
 
