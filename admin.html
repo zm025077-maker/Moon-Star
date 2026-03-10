@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+<style>
+body{
+font-family:Arial;
+padding:20px;
+}
+
+input,select{
+padding:10px;
+margin:5px;
+width:100%;
+}
+
+button{
+padding:10px;
+background:blue;
+color:white;
+border:none;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Add Product</h2>
+
+<input id="name" placeholder="Product Name">
+<input id="price" placeholder="Price">
+<input id="oldprice" placeholder="Old Price">
+<input id="image" placeholder="Image URL">
+
+<select id="category">
+<option>Fans</option>
+<option>Heaters</option>
+<option>Watches</option>
+<option>Mobile</option>
+</select>
+
+<button onclick="addProduct()">Add Product</button>
+
+<script>
+
+function addProduct(){
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+let product={
+name:document.getElementById("name").value,
+price:document.getElementById("price").value,
+oldprice:document.getElementById("oldprice").value,
+image:document.getElementById("image").value,
+category:document.getElementById("category").value
+}
+
+products.push(product);
+
+localStorage.setItem("products",JSON.stringify(products));
+
+alert("Product Added");
+
+}
+
+</script>
+
+</body>
+</html>
