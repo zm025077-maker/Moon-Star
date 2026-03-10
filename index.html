@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+88<!DOCTYPE html>
 <html>
 <head>
 <title>Zubair Online Store</title>
@@ -181,7 +181,7 @@ div.innerHTML=`
 
 <p class="price">Rs ${p.price}</p>
 
-<p class="old">Rs ${p.oldPrice}</p>
+${p.oldPrice ? `<p class="old">Rs ${p.oldPrice}</p>` : ""}
 
 <button onclick="addToCart(${i})">Add To Cart</button>
 
